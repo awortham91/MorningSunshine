@@ -1,0 +1,67 @@
+<style type="text/css">
+body {
+  background: #<%= bg_color %> url(http://www.psdgraphics.com/file/blue-sky-background.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    }
+</style>
+<body>
+<% if flash[:blah] %>
+  <!-- <div class='padding'> -->
+    <div id='flash' class='notice'>
+    <a class='close' data-dismiss='alert'>&#215;</a>
+    <%= flash[:blah] %></div>
+    <!-- </div> -->
+<% end %>
+
+
+
+  <div class="padding"><div class="header" id="header"><h1>Morning, Sunshine</h1></div></div>
+
+<div class="padding"><div class="advice" ><p>Advice of the day: <strong><%= quote %></strong></p></div></div>
+
+<div class="padding"><div class="weather">
+<h1>Weather of the day: </h1>
+<table align='center'>
+  <tr>
+    <% forecast.each do |by_hour| %>
+      <td><%=  by_hour[:time] %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <% forecast.each do |by_hour| %>
+      <td><%=  by_hour[:temp]%></td>
+    <% end %>
+  </tr>
+  <tr>
+    <% forecast.each do |by_hour| %>
+      <td><img src="<%=  by_hour[:image] %>"></td>
+    <% end %>
+  </tr>
+  <tr>
+    <% forecast.each do |by_hour| %>
+      <td><%=  by_hour[:conditions] %></td>
+    <% end %>
+  </tr>
+
+</table>
+</div></div>
+
+<div class="padding"><div class='todolist'>
+<h1>To Do List</h1>
+    <% tasks.each do |task| %>
+      <form action="/remove" method="post">
+        <input type='submit' value=" " name="<%= task['task'] %>">
+
+        <label for="task_name">  <%= task['task'] %></label>
+      </form>
+    <% end %>
+
+
+<br>
+    <form action="/" method="post">
+      <label for="task_name">New Task:</label>
+      <input type="text" id="task_name" name="task_name">
+      <input type="submit">
+    </form>
+  </div></div>
